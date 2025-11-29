@@ -13,7 +13,7 @@ Features:
 • Google Fonts (Poppins) + CSS variables used
 • Clean & professional design with modern color palette
 
-Live Demo: https://shivamm-cyber.github.io/capstone-shivam-lab5
+Live Demo:  https://shivamm-cyber.github.io/Lab-Assignment-5-Capstone-project/
 
 GitHub Repo: https://github.com/shivamm-cyber/capstone-shivam-lab5
 
