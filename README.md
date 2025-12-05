@@ -14,8 +14,5 @@ Features:
 • Clean & professional design with modern color palette
 
 Live Demo:  https://shivamm-cyber.github.io/Lab-Assignment-5-Capstone-project/
-
-GitHub Repo: https://github.com/shivamm-cyber/capstone-shivam-lab5
-
 Thank you Sir! 🙏
 Shivam | BCA Cybersecurity
