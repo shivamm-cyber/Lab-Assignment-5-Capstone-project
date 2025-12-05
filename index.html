@@ -5,22 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TechMart - Premium Electronics Store</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
 
-  <!-- Header & Navigation -->
   <header class="header">
     <div class="container header-container">
-      <div class="logo">
-        <h2>TechMart</h2>
-      </div>
-      <nav aria-label="Main navigation">
+      <div class="logo"><h2>TechMart</h2></div>
+      <nav>
         <ul class="nav-links">
           <li><a href="#home">Home</a></li>
-          <li><a href="#products">Products</a></li>
-          <li><a href="#about">About</a></li>
+20          <li><a href="#products">Products</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -31,7 +28,6 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
   <section id="home" class="hero">
     <div class="container hero-grid">
       <div class="hero-content">
@@ -40,43 +36,128 @@
         <a href="#products" class="btn-primary">Shop Now</a>
       </div>
       <div class="hero-image">
-        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Modern tech gadgets display">
+        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1000" alt="Premium gadgets">
       </div>
     </div>
   </section>
 
-  <!-- Products Section - CSS Grid -->
   <section id="products" class="section">
     <div class="container">
       <h2 class="section-title">Featured Products</h2>
       <div class="products-grid">
         <article class="product-card">
-          <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="iPhone 15 Pro - High-end smartphone">
+          <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500" alt="iPhone 15 Pro">
           <div class="card-body">
             <h3>iPhone 15 Pro</h3>
-            <p>Master HTML, CSS, JavaScript, React & Node.js</p>
-            <div class="price">$499</div>
-            <button class="btn-secondary" onclick="addToCart('iPhone 15 Pro', 499)">Add to Cart</button>
+            <p class="price">$1299</p>
+            <button class="btn-secondary" onclick="addToCart('iPhone 15 Pro', 1299)">Add to Cart</button>
           </div>
         </article>
         <article class="product-card">
-          <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="MacBook Air M3 - Laptop">
+          <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=500" alt="MacBook Air">
           <div class="card-body">
             <h3>MacBook Air M3</h3>
-            <p>From Python basics to deep learning models</p>
-            <div class="price">$599</div>
-            <button class="btn-secondary" onclick="addToCart('MacBook Air M3', 599)">Add to Cart</button>
+            <p class="price">$1099</p>
+            <button class="btn-secondary" onclick="addToCart('MacBook Air M3', 1099)">Add to Cart</button>
           </div>
         </article>
         <article class="product-card">
-          <img src="https://images.unsplash.com/photo-1527864550417-7fd92c0d6e05?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="AirPods Pro 2 - Wireless earbuds">
+          <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500" alt="AirPods Pro">
           <div class="card-body">
             <h3>AirPods Pro 2</h3>
-            <p>Figma, user research, prototyping & more</p>
-            <div class="price">$399</div>
-            <button class="btn-secondary" onclick="addToCart('AirPods Pro 2', 399)">Add to Cart</button>
+            <p class="price">$249</p>
+            <button class="btn-secondary" onclick="addToCart('AirPods Pro 2', 249)">Add to Cart</button>
           </div>
         </article>
         <article class="product-card">
-          <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Samsung Galaxy S24 Ultra - Smartphone">
-          <div class="
+          <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500" alt="Samsung S24 Ultra">
+          <div class="card-body">
+            <h3>Samsung S24 Ultra</h3>
+            <p class="price">$1199</p>
+            <button class="btn-secondary" onclick="addToCart('Samsung S24 Ultra', 1199)">Add to Cart</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cart Modal -->
+  <div id="cart-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeCart()">&times;</span>
+      <h2>Your Cart (<span id="modal-count">0</span>)</h2>
+      <div id="cart-items"></div>
+      <div class="cart-total">
+        <strong>Total: $<span id="cart-total">0</span></strong>
+        <button class="checkout-btn" onclick="checkout()">Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      cart.push({name, price});
+      document.getElementById('cart-count').textContent = cart.length;
+      document.getElementById('modal-count').textContent = cart.length;
+      alert(`${name} added to cart! 🛒`);
+      updateCartDisplay();
+    }
+
+    function toggleCart() {
+      document.getElementById('cart-modal').style.display = 'block';
+      updateCartDisplay();
+    }
+
+    function closeCart() {
+      document.getElementById('cart-modal').style.display = 'none';
+    }
+
+    function updateCartDisplay() {
+      const itemsDiv = document.getElementById('cart-items');
+      const totalSpan = document.getElementById('cart-total');
+      if (cart.length === 0) {
+        itemsDiv.innerHTML = "<p>Your cart is empty 😢</p>";
+        totalSpan.textContent = "0";
+        return;
+      }
+      let html = "";
+      let total = 0;
+      cart.forEach((item, i) => {
+        html += `<div class="cart-item">
+          <span>${item.name} - $${item.price}</span>
+          <button onclick="removeItem(${i})">Remove</button>
+        </div>`;
+        total += item.price;
+      });
+      itemsDiv.innerHTML = html;
+      totalSpan.textContent = total;
+    }
+
+    function removeItem(index) {
+      const removed = cart[index].name;
+      cart.splice(index, 1);
+      document.getElementById('cart-count').textContent = cart.length;
+      document.getElementById('modal-count').textContent = cart.length;
+      alert(`${removed} removed!`);
+      updateCartDisplay();
+    }
+
+    function checkout() {
+      if (cart.length === 0) return alert("Cart is empty!");
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      alert(`Checkout Successful! 🎉\nTotal: $${total}\nThank you for shopping!`);
+      cart = [];
+      document.getElementById('cart-count').textContent = '0';
+      document.getElementById('modal-count').textContent = '0';
+      updateCartDisplay();
+      closeCart();
+    }
+
+    window.onclick = e => {
+      if (e.target === document.getElementById('cart-modal')) closeCart();
+    }
+  </script>
+</body>
+</html>
